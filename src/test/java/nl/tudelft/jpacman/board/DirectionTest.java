@@ -5,14 +5,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.Test;
 
 /**
- * A very simple (and not particularly useful)
- * test class to have a starting point where to put tests.
- *
- * @author Arie van Deursen
+ * Tests the direction enum to ensure correct movement deltas.
  */
 public class DirectionTest {
+
     /**
-     * Do we get the correct delta when moving north?
+     * Tests that the NORTH direction has the correct delta.
      */
     @Test
     void testNorth() {
@@ -20,6 +18,9 @@ public class DirectionTest {
         assertThat(north.getDeltaY()).isEqualTo(-1);
     }
 
+    /**
+     * Tests that the SOUTH direction has the correct deltas.
+     */
     @Test
     void testSouth() {
         Direction south = Direction.valueOf("SOUTH");
@@ -27,6 +28,9 @@ public class DirectionTest {
         assertThat(south.getDeltaY()).isEqualTo(1);
     }
 
+    /**
+     * Tests that the EAST direction has the correct deltas.
+     */
     @Test
     void testEast() {
         Direction east = Direction.valueOf("EAST");
@@ -34,13 +38,14 @@ public class DirectionTest {
         assertThat(east.getDeltaY()).isEqualTo(0);
     }
 
-
+    /**
+     * Tests that the WEST direction has the correct deltas.
+     */
     @Test
     void testWest() {
         Direction west = Direction.valueOf("WEST");
         assertThat(west.getDeltaX()).isEqualTo(-1);
         assertThat(west.getDeltaY()).isEqualTo(0);
     }
-
-
 }
+
