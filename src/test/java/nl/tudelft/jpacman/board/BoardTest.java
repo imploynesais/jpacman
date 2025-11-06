@@ -16,12 +16,10 @@ class BoardTest {
      */
     @Test
     void testSquareAtOnValidBoard() {
-        // Create a 1x1 board with a BasicSquare
         Square[][] grid = new Square[1][1];
         grid[0][0] = new BasicSquare();
         Board board = new Board(grid);
 
-        // Test squareAt method
         Square square = board.squareAt(0, 0);
         assertNotNull(square, "Square should not be null");
         assertTrue(square instanceof BasicSquare, "Square should be a BasicSquare");
@@ -32,11 +30,12 @@ class BoardTest {
      */
     @Test
     void testSquareAtWithNullSquare() {
-        // Create a 1x1 board with a null square
         Square[][] grid = new Square[1][1];
         grid[0][0] = null;
 
         Board board = new Board(grid);
+        assertNotNull(board, "Board should be created even if a square is null");
     }
 }
+
 
