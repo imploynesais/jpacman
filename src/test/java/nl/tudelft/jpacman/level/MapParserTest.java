@@ -7,12 +7,12 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.junit.jupiter.api.Assertions;
+
 
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 
@@ -55,27 +55,28 @@ public class MapParserTest {
     }
 
     /**
-     * Test parseMap method with a malformed map.
-     * Should throw IllegalArgumentException.
+     * Test for the parseMap method (bad map).
      */
     @Test
     public void testParseMapWrong1() {
-        MapParser mapParser = new MapParser(levelFactory, boardFactory);
+        IllegalArgumentException thrown =
+            Assertions.assertThrows(IllegalArgumentException.class, () -> {
+                assertNotNull(boardFactory);
+                assertNotNull(levelFactory);
+                MapParser mapParser = new MapParser(levelFactory, boardFactory);
+                ArrayList<String> map = new ArrayList<>();
+            /*
+             Create a map with inconsistent size between
+             each row or contain invalid characters
+            */
+                map.add("####");
+                map.add("#P#X"); // 'X' is invalid
+                map.add("####");
 
-        ArrayList<String> badMap = new ArrayList<>();
-        badMap.add("####");
-        badMap.add("#P#X");
-        badMap.add("####");
-
-        IllegalArgumentException thrown = assertThrows(
-            IllegalArgumentException.class,
-            () -> mapParser.parseMap(badMap)
-        );
-
-        // Check that the exception message contains "invalid"
-        assertTrue(thrown.getMessage().toLowerCase().contains("invalid"));
+                mapParser.parseMap(map);
+            });
+        Assertions.assertTrue(thrown.getMessage().contains("invalid"));
     }
-
 
 }
 
