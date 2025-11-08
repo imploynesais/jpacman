@@ -15,7 +15,7 @@ import nl.tudelft.jpacman.npc.Ghost;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 /**
- * Creates new {@link Level}s from text representations.
+ * Creates new {@link Level}s from text representations.\
  *
  * @author Jeroen Roosen
  */
