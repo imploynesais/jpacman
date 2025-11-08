@@ -14,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+
 import nl.tudelft.jpacman.PacmanConfigurationException;
 
 
@@ -57,10 +58,10 @@ public class MapParserTest {
 
     /**
      * Test parseMap method with a malformed map.
-     * Should throw IllegalArgumentException.
+     * Should throw PacmanConfigurationException.
      */
     @Test
-    public void testParseMapWrong1() {
+    public void testParseMapWrong() {
         MapParser mapParser = new MapParser(levelFactory, boardFactory);
 
         ArrayList<String> badMap = new ArrayList<>();
@@ -73,8 +74,12 @@ public class MapParserTest {
             () -> mapParser.parseMap(badMap)
         );
 
-        assertEquals("Map contains invalid characters or inconsistent row lengths",
-            thrown.getMessage());
+        // Replace println with assertion
+        assertEquals(
+            "Map contains invalid characters",
+            thrown.getMessage(),
+            "Exception message should indicate invalid map content."
+        );
     }
 
 }
