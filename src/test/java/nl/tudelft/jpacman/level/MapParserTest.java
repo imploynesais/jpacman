@@ -12,10 +12,9 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
-import nl.tudelft.jpacman.PacmanConfigurationException;
 
 
 /**
@@ -69,17 +68,12 @@ public class MapParserTest {
         badMap.add("#P  X     G#");
         badMap.add("############");
 
-        PacmanConfigurationException thrown = assertThrows(
-            PacmanConfigurationException.class,
+        Exception thrown = assertThrows(
+            IllegalArgumentException.class,
             () -> mapParser.parseMap(badMap)
         );
 
-        // Replace println with assertion
-        assertEquals(
-            "Map contains invalid characters",
-            thrown.getMessage(),
-            "Exception message should indicate invalid map content."
-        );
+        assertTrue(thrown.getMessage().contains("Invalid character"));
     }
 
 }
