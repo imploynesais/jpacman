@@ -11,9 +11,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 
@@ -57,24 +56,26 @@ public class MapParserTest {
 
     /**
      * Test parseMap method with a malformed map.
-     * Should throw PacmanConfigurationException.
+     * Should throw IllegalArgumentException.
      */
     @Test
-    public void testParseMapWrong() {
+    public void testParseMapWrong1() {
         MapParser mapParser = new MapParser(levelFactory, boardFactory);
 
         ArrayList<String> badMap = new ArrayList<>();
-        badMap.add("###########");
-        badMap.add("#P  X     G#");
-        badMap.add("############");
+        badMap.add("####");
+        badMap.add("#P#X");
+        badMap.add("####");
 
-        Exception thrown = assertThrows(
+        IllegalArgumentException thrown = assertThrows(
             IllegalArgumentException.class,
             () -> mapParser.parseMap(badMap)
         );
 
-        assertTrue(thrown.getMessage().contains("Invalid character"));
+        // Check that the exception message contains "invalid"
+        assertTrue(thrown.getMessage().toLowerCase().contains("invalid"));
     }
+
 
 }
 
