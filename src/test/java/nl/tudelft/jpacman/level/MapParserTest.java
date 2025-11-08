@@ -70,7 +70,8 @@ public class MapParserTest {
             () -> mapParser.parseMap(badMap)
         );
 
-        assertEquals("Map contains invalid characters or inconsistent row lengths", thrown.getMessage());
+        assertEquals("Map contains invalid characters or inconsistent row lengths",
+            thrown.getMessage());
     }
 
 
