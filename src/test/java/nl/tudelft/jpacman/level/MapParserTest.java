@@ -13,6 +13,8 @@ import org.junit.jupiter.api.Assertions;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import nl.tudelft.jpacman.PacmanConfigurationException;
+
 
 
 
@@ -54,28 +56,25 @@ public class MapParserTest {
         Mockito.verify(boardFactory, Mockito.atLeastOnce()).createGround();
     }
 
+
     /**
      * Test for the parseMap method (bad map).
      */
     @Test
     public void testParseMapWrong1() {
-        IllegalArgumentException thrown =
-            Assertions.assertThrows(IllegalArgumentException.class, () -> {
+        PacmanConfigurationException thrown =
+            Assertions.assertThrows(PacmanConfigurationException.class, () -> {
                 assertNotNull(boardFactory);
                 assertNotNull(levelFactory);
                 MapParser mapParser = new MapParser(levelFactory, boardFactory);
                 ArrayList<String> map = new ArrayList<>();
-            /*
-             Create a map with inconsistent size between
-             each row or contain invalid characters
-            */
-                map.add("####");
-                map.add("#P#X"); // 'X' is invalid
-                map.add("####");
 
+                map.add("############");
+                map.add("#P G");
                 mapParser.parseMap(map);
             });
-        Assertions.assertTrue(thrown.getMessage().contains("invalid"));
+        Assertions.assertEquals("Input text lines are not of equal width.",
+            thrown.getMessage());
     }
 
 }

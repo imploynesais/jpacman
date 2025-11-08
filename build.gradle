@@ -90,16 +90,16 @@ tasks.withType(com.github.spotbugs.SpotBugsTask) {
 
 task staticAnalysis(type: GradleBuild) {
     tasks = [
-        'clean',
-        'checkstyleMain',
-        'checkstyleTest',
-        'checkstyleDefaultTest',
-        'pmdMain',
-        'pmdTest',
-        'pmdDefaultTest',
-        'spotbugsMain',
-        'spotbugsTest',
-        'spotbugsDefaultTest',
+            'clean',
+            'checkstyleMain',
+            'checkstyleTest',
+            'checkstyleDefaultTest',
+            'pmdMain',
+            'pmdTest',
+            'pmdDefaultTest',
+            'spotbugsMain',
+            'spotbugsTest',
+            'spotbugsDefaultTest',
     ]
 }
 
