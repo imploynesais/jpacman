@@ -11,6 +11,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * This is a test class for MapParser.
@@ -49,6 +51,29 @@ public class MapParserTest {
         Mockito.verify(boardFactory, Mockito.atLeastOnce()).createWall();
         Mockito.verify(boardFactory, Mockito.atLeastOnce()).createGround();
     }
+
+    /**
+     * Test parseMap method with a malformed map.
+     * Should throw IllegalArgumentException.
+     */
+    @Test
+    public void testParseMapWrong1() {
+        MapParser mapParser = new MapParser(levelFactory, boardFactory);
+
+        ArrayList<String> badMap = new ArrayList<>();
+        badMap.add("###########");
+        badMap.add("#P  X     G#");
+        badMap.add("############");
+
+        IllegalArgumentException thrown = assertThrows(
+            IllegalArgumentException.class,
+            () -> mapParser.parseMap(badMap)
+        );
+
+        assertEquals("Map contains invalid characters or inconsistent row lengths", thrown.getMessage());
+    }
+
+
 }
 
 
