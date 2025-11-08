@@ -27,6 +27,9 @@ public class MapParserTest {
     @Mock
     private Blinky blinky;
 
+    /**
+     * Test parseMap method with mocked factories and ghost.
+     */
     @Test
     public void testParseMapGood() {
         // No need for initMocks
