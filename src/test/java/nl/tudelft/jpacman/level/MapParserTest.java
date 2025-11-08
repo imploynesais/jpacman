@@ -14,6 +14,9 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import nl.tudelft.jpacman.PacmanConfigurationException;
+
+
 /**
  * This is a test class for MapParser.
  */
@@ -65,14 +68,14 @@ public class MapParserTest {
         badMap.add("#P  X     G#");
         badMap.add("############");
 
-        IllegalArgumentException thrown = assertThrows(
-            IllegalArgumentException.class,
+        PacmanConfigurationException thrown = assertThrows(
+            PacmanConfigurationException.class,
             () -> mapParser.parseMap(badMap)
         );
 
-        assertEquals("Map contains invalid characters or inconsistent row lengths",
-            thrown.getMessage());
+        assertEquals("Map contains invalid characters or inconsistent row lengths", thrown.getMessage());
     }
+
 
 
 }
